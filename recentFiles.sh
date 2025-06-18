@@ -1,6 +1,10 @@
 #!/bin/bash
 
+# counts files updated after a date, currently hardcoded in check_date
+# checks all files in directories starting with $basename + files one subdirectory down
+
 function check_date() {
+	# TODO: update date before use, or take in arbitrary date as parameter to check_date
 	compVal=$(date -d 2022-09-01 +%s)
 	dateStr=`stat -c '%y' "$1"`
 	dateVal=$(date -d "$dateStr" +%s)
@@ -13,6 +17,7 @@ function check_date() {
 }
 
 shopt -s nullglob
+# TODO: update directory base name
 basename="user_"
 for dir in $basename*; do
 	if [ -d "$dir" ]; then
